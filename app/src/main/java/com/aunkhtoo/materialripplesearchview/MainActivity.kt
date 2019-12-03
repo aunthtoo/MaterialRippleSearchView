@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
         // Enable/Disable Submit button in the keyboard
 
-        searchView.isSubmitButtonEnabled = false
+        searchView.isSubmitButtonEnabled = true
 
         // Change search close button image
 
