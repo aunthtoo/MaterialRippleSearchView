@@ -47,22 +47,7 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        when (item?.itemId) {
-
-            R.id.menuSearch -> {
-
-                itemSearch?.expandActionView()
-
-                return true
-            }
-
-        }
-
-        return super.onOptionsItemSelected(item)
-
-    }
 
     //toolbar ripple search
     protected fun setupToolbarSearch() {
@@ -72,14 +57,13 @@ class MainActivity : AppCompatActivity() {
         toolbarSearch?.inflateMenu(R.menu.menu_search)
         menuSearch = toolbarSearch?.menu
 
+        //search item
+        itemSearch = menuSearch?.findItem(R.id.action_search)
+
         toolbarSearch?.setNavigationOnClickListener {
            itemSearch?.collapseActionView()
 
         }
-
-
-        //search item
-        itemSearch = menuSearch?.findItem(R.id.action_filter_search)
 
 
         MenuItemCompat.setOnActionExpandListener(itemSearch, object : MenuItemCompat.OnActionExpandListener {
@@ -113,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     //initialize search view
     fun initSearchView() {
-        val searchView = menuSearch?.findItem(R.id.action_filter_search)?.actionView as SearchView
+        val searchView = itemSearch?.actionView as SearchView
 
         // Enable/Disable Submit button in the keyboard
 
@@ -162,6 +146,21 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when (item?.itemId) {
+
+            R.id.menuSearch -> {
+                itemSearch?.expandActionView()
+                return true
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item)
 
     }
 
